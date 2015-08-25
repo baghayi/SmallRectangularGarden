@@ -30,7 +30,8 @@ int getSoilStatus(int sensorPin) {
     Serial.print(sensorValue);
     Serial.print(" = ");
 
-    sensorValue = map(sensorValue, 0, 1023, 2, 0);
+    sensorValue = constrain(sensorValue, 0, 861);
+    sensorValue = map(sensorValue, 0, 861, 2, 0);
     switch(sensorValue){
         case 0:
         return DRY;

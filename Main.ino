@@ -26,6 +26,10 @@ void setup(){
 #define FLOAT 2
 int getSoilStatus(int sensorPin) {
     int sensorValue = analogRead(sensorPin);
+    Serial.print("Row Value: ");
+    Serial.print(sensorValue);
+    Serial.print(" = ");
+
     sensorValue = map(sensorValue, 0, 1023, 2, 0);
     switch(sensorValue){
         case 0:
@@ -65,6 +69,7 @@ void loop(){
     }
     Serial.print("Sensor A0: ");
     Serial.print(a0SoilSensorValue);
+    Serial.print(" | ");
 
     int a1SoilSensorValue = getSoilStatus(A1);
     switch(a1SoilSensorValue){
@@ -86,7 +91,7 @@ void loop(){
         digitalWrite(floatLedA1, HIGH);
         break;
     }
-    Serial.print(", Sensor A1: ");
+    Serial.print("Sensor A1: ");
     Serial.println(a1SoilSensorValue);
 
     delay(300);

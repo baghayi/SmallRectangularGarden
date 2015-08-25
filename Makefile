@@ -74,7 +74,7 @@ VERSION ?=	1.0
 # Valid model names can be found in $(ARDUINO_DIR)/hardware/arduino/avr/boards.txt
 # This must be set to a valid model name.
 #ARDUINO_MODEL ?= micro
-ARDUINO_MODEL = uno
+ARDUINO_MODEL = nano
 #ARDUINO_MODEL = nano328  # Is set to a 168 CPU
 #ARDUINO_MODEL = atmega2560
 
@@ -96,7 +96,7 @@ ARCH ?= avr
 # BSD:   e.g. /dev/cuaU0
 # It is a good idea to use udev rules to create a device name that is constant,
 # based on the serial number etc. of the USB device.
-PORT =		/dev/ttyACM0
+PORT =		/dev/ttyUSB0
 #PORT ?=		/dev/serial/by-id/*Arduino*
 
 # Arduino version (e.g. 23 for 0023, or 105 for 1.0.5).

@@ -53,7 +53,12 @@ int getSoilStatus(int sensorPin) {
 }
 
 boolean getLEDsPowerSwitchState(){
-    return digitalRead(LEDsPowerSwitchPin);
+    int state = digitalRead(LEDsPowerSwitchPin);
+    if(state == HIGH){
+        LEDsPowerSwitchState = !LEDsPowerSwitchState;
+    }
+
+    return LEDsPowerSwitchState;
 }
 
 void loop(){

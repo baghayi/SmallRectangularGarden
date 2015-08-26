@@ -7,7 +7,7 @@ const int wetLedA1 = 6; // yellow led
 const int dryLedA1 = 7; // red led
 
 const int LEDsPowerSwitchPin = 8;
-boolean LEDsPowerSwitchState = true; // True as On
+boolean LEDsPowerSwitchState = HIGH;
 
 void setup(){
     pinMode(A0, INPUT);
@@ -54,8 +54,10 @@ int getSoilStatus(int sensorPin) {
 
 boolean getLEDsPowerSwitchState(){
     int state = digitalRead(LEDsPowerSwitchPin);
+
     if(state == HIGH){
         LEDsPowerSwitchState = !LEDsPowerSwitchState;
+        delay(200);
     }
 
     return LEDsPowerSwitchState;
@@ -63,7 +65,7 @@ boolean getLEDsPowerSwitchState(){
 
 void loop(){
     LEDsPowerSwitchState = getLEDsPowerSwitchState();
-    if(LEDsPowerSwitchState == false){
+    if(LEDsPowerSwitchState == LOW){
         digitalWrite(dryLedA0, LOW);
         digitalWrite(wetLedA0, LOW);
         digitalWrite(floatLedA0, LOW);
@@ -72,7 +74,7 @@ void loop(){
         digitalWrite(wetLedA1, LOW);
         digitalWrite(floatLedA1, LOW);
 
-        delay(300);
+        delay(20);
         return;
     }
 

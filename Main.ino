@@ -6,6 +6,9 @@ const int floatLedA1 = 5; // green led
 const int wetLedA1 = 6; // yellow led
 const int dryLedA1 = 7; // red led
 
+const int LEDsPowerSwitchPin = 8;
+boolean LEDsPowerSwitchState = true; // True as On
+
 void setup(){
     pinMode(A0, INPUT);
     pinMode(A1, INPUT);
@@ -17,6 +20,8 @@ void setup(){
     pinMode(floatLedA1, OUTPUT);
     pinMode(wetLedA1, OUTPUT);
     pinMode(dryLedA1, OUTPUT);
+
+    pinMode(LEDsPowerSwitchPin, INPUT);
     
     Serial.begin(9600);
 }
@@ -47,7 +52,13 @@ int getSoilStatus(int sensorPin) {
     }
 }
 
+boolean getLEDsPowerSwitchState(){
+    return digitalRead(LEDsPowerSwitchPin);
+}
+
 void loop(){
+    LEDsPowerSwitchState = getLEDsPowerSwitchState();
+
     int a0SoilSensorValue = getSoilStatus(A0);
     switch(a0SoilSensorValue){
         case DRY:

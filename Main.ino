@@ -58,6 +58,18 @@ boolean getLEDsPowerSwitchState(){
 
 void loop(){
     LEDsPowerSwitchState = getLEDsPowerSwitchState();
+    if(LEDsPowerSwitchState == false){
+        digitalWrite(dryLedA0, LOW);
+        digitalWrite(wetLedA0, LOW);
+        digitalWrite(floatLedA0, LOW);
+
+        digitalWrite(dryLedA1, LOW);
+        digitalWrite(wetLedA1, LOW);
+        digitalWrite(floatLedA1, LOW);
+
+        delay(300);
+        return;
+    }
 
     int a0SoilSensorValue = getSoilStatus(A0);
     switch(a0SoilSensorValue){

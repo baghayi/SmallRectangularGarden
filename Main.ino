@@ -101,6 +101,20 @@ void turnOnAppropriateSensorLED(int sensorState, SensorLEDPins ledPins, int powe
     }
 }
 
+void managerWaterPomp(int sensorValues[]){
+    boolean startWaterPomp = false;
+
+    for(int i=0; i < sizeof(sensorValues); i++){
+        if(sensorValues[i] <= WET)
+            startWaterPomp = true;
+    }
+
+    if(startWaterPomp)
+        digitalWrite(waterPompPin, HIGH);
+    else
+        digitalWrite(waterPompPin, LOW);
+}
+
 void loop(){
     int ledsPowerSwitchState = getLEDsPowerSwitchState();
 
@@ -115,12 +129,8 @@ void loop(){
     Serial.print("Sensor A1: ");
     Serial.println(a1SoilSensorValue);
 
-    // if wet, then water it.
-    if(a0SoilSensorValue <= WET || a1SoilSensorValue <= WET){
-        digitalWrite(waterPompPin, HIGH);
-    }else{
-        digitalWrite(waterPompPin, LOW);
-    }
+    int soilSensorValues[2] = {a0SoilSensorValue, a1SoilSensorValue};
+    managerWaterPomp(soilSensorValues);
 
     delay(20);
 }

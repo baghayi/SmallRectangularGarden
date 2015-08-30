@@ -116,7 +116,7 @@ void loop(){
     Serial.println(a1SoilSensorValue);
 
     // if wet, then water it.
-    if(a0SoilSensorValue == WET || a1SoilSensorValue == WET){
+    if(a0SoilSensorValue <= WET || a1SoilSensorValue <= WET){
         digitalWrite(waterPompPin, HIGH);
     }else{
         digitalWrite(waterPompPin, LOW);

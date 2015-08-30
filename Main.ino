@@ -13,6 +13,11 @@ boolean LEDsPowerSwitchState = LOW;
 
 const int waterPompPin = 9;
 
+int getSoilStatus(int sensorPin);
+boolean getLEDsPowerSwitchState();
+void turnOnAppropriateSensorLED(int sensorState, SensorLEDPins ledPins, int powerSwitchState);
+void managerWaterPomp(int sensorValues[]);
+
 void setup(){
     pinMode(A0, INPUT);
     pinMode(A1, INPUT);
@@ -36,6 +41,7 @@ void setup(){
 #define DRY 0
 #define WET 1
 #define FLOOD 2
+
 int getSoilStatus(int sensorPin) {
     int sensorValue = analogRead(sensorPin);
     Serial.print("Row Value: ");

@@ -1,10 +1,12 @@
-const int floodLedA0 = 2; // green led
-const int wetLedA0 = 3; // yellow led
-const int dryLedA0 = 4; // red led
+struct SensorLEDPins {
+    int flood; // green led
+    int wet; // yellow led
+    int dry; // red led
+};
 
-const int floodLedA1 = 5; // green led
-const int wetLedA1 = 6; // yellow led
-const int dryLedA1 = 7; // red led
+SensorLEDPins sensorA0Leds = {2, 3, 4};
+
+SensorLEDPins sensorA1Leds = {5, 6, 7};
 
 const int LEDsPowerSwitchPin = 8;
 boolean LEDsPowerSwitchState = LOW;
@@ -15,13 +17,13 @@ void setup(){
     pinMode(A0, INPUT);
     pinMode(A1, INPUT);
 
-    pinMode(floodLedA0, OUTPUT);
-    pinMode(wetLedA0, OUTPUT);
-    pinMode(dryLedA0, OUTPUT);
+    pinMode(sensorA0Leds.flood, OUTPUT);
+    pinMode(sensorA0Leds.wet, OUTPUT);
+    pinMode(sensorA0Leds.dry, OUTPUT);
 
-    pinMode(floodLedA1, OUTPUT);
-    pinMode(wetLedA1, OUTPUT);
-    pinMode(dryLedA1, OUTPUT);
+    pinMode(sensorA1Leds.flood, OUTPUT);
+    pinMode(sensorA1Leds.wet, OUTPUT);
+    pinMode(sensorA1Leds.dry, OUTPUT);
 
     pinMode(LEDsPowerSwitchPin, INPUT);
     digitalWrite(LEDsPowerSwitchPin, LOW);
@@ -71,13 +73,13 @@ boolean getLEDsPowerSwitchState(){
 void loop(){
     LEDsPowerSwitchState = getLEDsPowerSwitchState();
     if(LEDsPowerSwitchState == LOW){
-        digitalWrite(dryLedA0, LOW);
-        digitalWrite(wetLedA0, LOW);
-        digitalWrite(floodLedA0, LOW);
+        digitalWrite(sensorA0Leds.dry, LOW);
+        digitalWrite(sensorA0Leds.wet, LOW);
+        digitalWrite(sensorA0Leds.flood, LOW);
 
-        digitalWrite(dryLedA1, LOW);
-        digitalWrite(wetLedA1, LOW);
-        digitalWrite(floodLedA1, LOW);
+        digitalWrite(sensorA1Leds.dry, LOW);
+        digitalWrite(sensorA1Leds.wet, LOW);
+        digitalWrite(sensorA1Leds.flood, LOW);
 
         delay(20);
         return;
@@ -86,21 +88,21 @@ void loop(){
     int a0SoilSensorValue = getSoilStatus(A0);
     switch(a0SoilSensorValue){
         case DRY:
-        digitalWrite(dryLedA0, HIGH);
-        digitalWrite(wetLedA0, LOW);
-        digitalWrite(floodLedA0, LOW);
+        digitalWrite(sensorA0Leds.dry, HIGH);
+        digitalWrite(sensorA0Leds.wet, LOW);
+        digitalWrite(sensorA0Leds.flood, LOW);
         break;
 
         case WET:
-        digitalWrite(dryLedA0, LOW);
-        digitalWrite(wetLedA0, HIGH);
-        digitalWrite(floodLedA0, LOW);
+        digitalWrite(sensorA0Leds.dry, LOW);
+        digitalWrite(sensorA0Leds.wet, HIGH);
+        digitalWrite(sensorA0Leds.flood, LOW);
         break;
 
         case FLOAT:
-        digitalWrite(dryLedA0, LOW);
-        digitalWrite(wetLedA0, LOW);
-        digitalWrite(floodLedA0, HIGH);
+        digitalWrite(sensorA0Leds.dry, LOW);
+        digitalWrite(sensorA0Leds.wet, LOW);
+        digitalWrite(sensorA0Leds.flood, HIGH);
         break;
     }
     Serial.print("Sensor A0: ");
@@ -110,21 +112,21 @@ void loop(){
     int a1SoilSensorValue = getSoilStatus(A1);
     switch(a1SoilSensorValue){
         case DRY:
-        digitalWrite(dryLedA1, HIGH);
-        digitalWrite(wetLedA1, LOW);
-        digitalWrite(floodLedA1, LOW);
+        digitalWrite(sensorA1Leds.dry, HIGH);
+        digitalWrite(sensorA1Leds.wet, LOW);
+        digitalWrite(sensorA1Leds.flood, LOW);
         break;
 
         case WET:
-        digitalWrite(dryLedA1, LOW);
-        digitalWrite(wetLedA1, HIGH);
-        digitalWrite(floodLedA1, LOW);
+        digitalWrite(sensorA1Leds.dry, LOW);
+        digitalWrite(sensorA1Leds.wet, HIGH);
+        digitalWrite(sensorA1Leds.flood, LOW);
         break;
 
         case FLOAT:
-        digitalWrite(dryLedA1, LOW);
-        digitalWrite(wetLedA1, LOW);
-        digitalWrite(floodLedA1, HIGH);
+        digitalWrite(sensorA1Leds.dry, LOW);
+        digitalWrite(sensorA1Leds.wet, LOW);
+        digitalWrite(sensorA1Leds.flood, HIGH);
         break;
     }
     Serial.print("Sensor A1: ");

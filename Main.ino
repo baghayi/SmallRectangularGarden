@@ -70,6 +70,28 @@ boolean getLEDsPowerSwitchState(){
     return LEDsPowerSwitchState;
 }
 
+void turnOnAppropriateSensorLED(int sensorState, SensorLEDPins ledPins){
+    switch(sensorState){
+        case DRY:
+        digitalWrite(ledPins.dry, HIGH);
+        digitalWrite(ledPins.wet, LOW);
+        digitalWrite(ledPins.flood, LOW);
+        break;
+
+        case WET:
+        digitalWrite(ledPins.dry, LOW);
+        digitalWrite(ledPins.wet, HIGH);
+        digitalWrite(ledPins.flood, LOW);
+        break;
+
+        case FLOOD:
+        digitalWrite(ledPins.dry, LOW);
+        digitalWrite(ledPins.wet, LOW);
+        digitalWrite(ledPins.flood, HIGH);
+        break;
+    }
+}
+
 void loop(){
     LEDsPowerSwitchState = getLEDsPowerSwitchState();
     if(LEDsPowerSwitchState == LOW){
@@ -86,49 +108,13 @@ void loop(){
     }
 
     int a0SoilSensorValue = getSoilStatus(A0);
-    switch(a0SoilSensorValue){
-        case DRY:
-        digitalWrite(sensorA0Leds.dry, HIGH);
-        digitalWrite(sensorA0Leds.wet, LOW);
-        digitalWrite(sensorA0Leds.flood, LOW);
-        break;
-
-        case WET:
-        digitalWrite(sensorA0Leds.dry, LOW);
-        digitalWrite(sensorA0Leds.wet, HIGH);
-        digitalWrite(sensorA0Leds.flood, LOW);
-        break;
-
-        case FLOOD:
-        digitalWrite(sensorA0Leds.dry, LOW);
-        digitalWrite(sensorA0Leds.wet, LOW);
-        digitalWrite(sensorA0Leds.flood, HIGH);
-        break;
-    }
+    turnOnAppropriateSensorLED(a0SoilSensorValue, sensorA0Leds);
     Serial.print("Sensor A0: ");
     Serial.print(a0SoilSensorValue);
     Serial.print(" | ");
 
     int a1SoilSensorValue = getSoilStatus(A1);
-    switch(a1SoilSensorValue){
-        case DRY:
-        digitalWrite(sensorA1Leds.dry, HIGH);
-        digitalWrite(sensorA1Leds.wet, LOW);
-        digitalWrite(sensorA1Leds.flood, LOW);
-        break;
-
-        case WET:
-        digitalWrite(sensorA1Leds.dry, LOW);
-        digitalWrite(sensorA1Leds.wet, HIGH);
-        digitalWrite(sensorA1Leds.flood, LOW);
-        break;
-
-        case FLOOD:
-        digitalWrite(sensorA1Leds.dry, LOW);
-        digitalWrite(sensorA1Leds.wet, LOW);
-        digitalWrite(sensorA1Leds.flood, HIGH);
-        break;
-    }
+    turnOnAppropriateSensorLED(a1SoilSensorValue, sensorA1Leds);
     Serial.print("Sensor A1: ");
     Serial.println(a1SoilSensorValue);
 

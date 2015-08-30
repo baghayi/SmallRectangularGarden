@@ -71,6 +71,16 @@ boolean getLEDsPowerSwitchState(){
 }
 
 void turnOnAppropriateSensorLED(int sensorState, SensorLEDPins ledPins){
+
+    if(getLEDsPowerSwitchState() == LOW){
+        digitalWrite(ledPins.dry, LOW);
+        digitalWrite(ledPins.wet, LOW);
+        digitalWrite(ledPins.flood, LOW);
+
+        delay(20);
+        return;
+    }
+
     switch(sensorState){
         case DRY:
         digitalWrite(ledPins.dry, HIGH);
@@ -93,20 +103,6 @@ void turnOnAppropriateSensorLED(int sensorState, SensorLEDPins ledPins){
 }
 
 void loop(){
-    LEDsPowerSwitchState = getLEDsPowerSwitchState();
-    if(LEDsPowerSwitchState == LOW){
-        digitalWrite(sensorA0Leds.dry, LOW);
-        digitalWrite(sensorA0Leds.wet, LOW);
-        digitalWrite(sensorA0Leds.flood, LOW);
-
-        digitalWrite(sensorA1Leds.dry, LOW);
-        digitalWrite(sensorA1Leds.wet, LOW);
-        digitalWrite(sensorA1Leds.flood, LOW);
-
-        delay(20);
-        return;
-    }
-
     int a0SoilSensorValue = getSoilStatus(A0);
     turnOnAppropriateSensorLED(a0SoilSensorValue, sensorA0Leds);
     Serial.print("Sensor A0: ");

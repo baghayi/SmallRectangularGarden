@@ -64,7 +64,7 @@ boolean getLEDsPowerSwitchState(){
 
     if(state == HIGH){
         LEDsPowerSwitchState = !LEDsPowerSwitchState;
-        delay(200);
+        delay(150);
     }
 
     return LEDsPowerSwitchState;
@@ -77,7 +77,6 @@ void turnOnAppropriateSensorLED(int sensorState, SensorLEDPins ledPins, int powe
         digitalWrite(ledPins.wet, LOW);
         digitalWrite(ledPins.flood, LOW);
 
-        delay(20);
         return;
     }
 
@@ -123,5 +122,5 @@ void loop(){
         digitalWrite(waterPompPin, LOW);
     }
 
-    delay(300);
+    delay(20);
 }

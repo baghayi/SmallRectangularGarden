@@ -7,7 +7,7 @@ const int wetLedA1 = 6; // yellow led
 const int dryLedA1 = 7; // red led
 
 const int LEDsPowerSwitchPin = 8;
-boolean LEDsPowerSwitchState = HIGH;
+boolean LEDsPowerSwitchState = LOW;
 
 const int waterPompPin = 9;
 
@@ -24,6 +24,7 @@ void setup(){
     pinMode(dryLedA1, OUTPUT);
 
     pinMode(LEDsPowerSwitchPin, INPUT);
+    digitalWrite(LEDsPowerSwitchPin, LOW);
 
     pinMode(waterPompPin, OUTPUT);
     

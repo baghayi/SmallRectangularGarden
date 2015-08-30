@@ -35,7 +35,7 @@ void setup(){
 
 #define DRY 0
 #define WET 1
-#define FLOAT 2
+#define FLOOD 2
 int getSoilStatus(int sensorPin) {
     int sensorValue = analogRead(sensorPin);
     Serial.print("Row Value: ");
@@ -54,7 +54,7 @@ int getSoilStatus(int sensorPin) {
         break;
 
         case 2:
-        return FLOAT;
+        return FLOOD;
         break;
     }
 }
@@ -99,7 +99,7 @@ void loop(){
         digitalWrite(sensorA0Leds.flood, LOW);
         break;
 
-        case FLOAT:
+        case FLOOD:
         digitalWrite(sensorA0Leds.dry, LOW);
         digitalWrite(sensorA0Leds.wet, LOW);
         digitalWrite(sensorA0Leds.flood, HIGH);
@@ -123,7 +123,7 @@ void loop(){
         digitalWrite(sensorA1Leds.flood, LOW);
         break;
 
-        case FLOAT:
+        case FLOOD:
         digitalWrite(sensorA1Leds.dry, LOW);
         digitalWrite(sensorA1Leds.wet, LOW);
         digitalWrite(sensorA1Leds.flood, HIGH);

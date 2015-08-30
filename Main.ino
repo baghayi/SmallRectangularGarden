@@ -70,9 +70,9 @@ boolean getLEDsPowerSwitchState(){
     return LEDsPowerSwitchState;
 }
 
-void turnOnAppropriateSensorLED(int sensorState, SensorLEDPins ledPins){
+void turnOnAppropriateSensorLED(int sensorState, SensorLEDPins ledPins, int powerSwitchState){
 
-    if(getLEDsPowerSwitchState() == LOW){
+    if(powerSwitchState == LOW){
         digitalWrite(ledPins.dry, LOW);
         digitalWrite(ledPins.wet, LOW);
         digitalWrite(ledPins.flood, LOW);
@@ -103,14 +103,16 @@ void turnOnAppropriateSensorLED(int sensorState, SensorLEDPins ledPins){
 }
 
 void loop(){
+    int ledsPowerSwitchState = getLEDsPowerSwitchState();
+
     int a0SoilSensorValue = getSoilStatus(A0);
-    turnOnAppropriateSensorLED(a0SoilSensorValue, sensorA0Leds);
+    turnOnAppropriateSensorLED(a0SoilSensorValue, sensorA0Leds, ledsPowerSwitchState);
     Serial.print("Sensor A0: ");
     Serial.print(a0SoilSensorValue);
     Serial.print(" | ");
 
     int a1SoilSensorValue = getSoilStatus(A1);
-    turnOnAppropriateSensorLED(a1SoilSensorValue, sensorA1Leds);
+    turnOnAppropriateSensorLED(a1SoilSensorValue, sensorA1Leds, ledsPowerSwitchState);
     Serial.print("Sensor A1: ");
     Serial.println(a1SoilSensorValue);
 

@@ -9,6 +9,8 @@ const int dryLedA1 = 7; // red led
 const int LEDsPowerSwitchPin = 8;
 boolean LEDsPowerSwitchState = HIGH;
 
+const int waterPompPin = 9;
+
 void setup(){
     pinMode(A0, INPUT);
     pinMode(A1, INPUT);
@@ -22,6 +24,8 @@ void setup(){
     pinMode(dryLedA1, OUTPUT);
 
     pinMode(LEDsPowerSwitchPin, INPUT);
+
+    pinMode(waterPompPin, OUTPUT);
     
     Serial.begin(9600);
 }
@@ -124,6 +128,13 @@ void loop(){
     }
     Serial.print("Sensor A1: ");
     Serial.println(a1SoilSensorValue);
+
+    // if wet, then water it.
+    if(a0SoilSensorValue == WET || a1SoilSensorValue == WET){
+        digitalWrite(waterPompPin, HIGH);
+    }else{
+        digitalWrite(waterPompPin, LOW);
+    }
 
     delay(300);
 }
